@@ -1,0 +1,117 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- Project is using Maven 4.0.0 model version -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Define a parent POM to inherit common configurations from Spring Boot -->
+    <parent>
+        <groupId>org.springframework.boot</groupId> <!-- The group ID of the parent POM -->
+        <artifactId>spring-boot-starter-parent</artifactId> <!-- The artifact ID for the Spring Boot starter parent -->
+        <version>2.7.0</version>  <!-- Spring Boot version, can be changed as required -->
+        <relativePath/> <!-- Optional: Defines the relative path to the parent POM -->
+    </parent>
+
+    <!-- Defining the group ID, artifact ID, and version of the current project -->
+    <groupId>com.example</groupId> <!-- The group ID for your project -->
+    <artifactId>badword_chatgpt-api</artifactId> <!-- The artifact ID for your project -->
+    <version>0.0.1-SNAPSHOT</version> <!-- The version of your project -->
+
+    <!-- Defining properties to use Java version 17 -->
+    <properties>
+        <java.version>17</java.version> <!-- Java version 17 is used for this project -->
+    </properties>
+
+    <!-- Dependencies section -->
+    <dependencies>
+
+        <!-- JSON Simple library to parse and create JSON objects -->
+        <dependency>
+            <groupId>com.googlecode.json-simple</groupId>
+            <artifactId>json-simple</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+
+        <!-- Spring Boot Starter Web: includes everything needed to create a web application -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- OkHttp library for making HTTP requests (used to communicate with APIs like OpenAI) -->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.9.3</version>
+        </dependency>
+
+        <!-- JSON library to handle JSON data -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20210307</version>
+        </dependency>
+
+        <!-- Spring Boot Starter Test for writing unit and integration tests in a Spring Boot project -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <exclusions>
+                <!-- Exclude JUnit 4 and use JUnit 5 -->
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- JUnit Jupiter API for unit tests (JUnit 5) -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.7.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- JUnit Jupiter Engine to run JUnit tests (JUnit 5) -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.7.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- AssertJ for fluent assertions in tests -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.19.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- Build configuration for Maven -->
+    <build>
+        <plugins>
+            <!-- Spring Boot Maven Plugin to run the application -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <!-- Maven Compiler Plugin to set Java version -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <!-- Specify the source and target Java version (Java 17) -->s
+                    <source>17</source>
+                    <target>17</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

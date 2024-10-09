@@ -1,0 +1,9 @@
+--- xcodebuild: WARNING: Using the first of multiple matching destinations:
+{ platform:iOS Simulator, id:1D5FEF12-08AF-4113-AA29-7B145C2ECF0B, OS:17.5, name:iPhone SE (3rd generation) }
+{ platform:iOS Simulator, id:1D5FEF12-08AF-4113-AA29-7B145C2ECF0B, OS:17.5, name:iPhone SE (3rd generation) }
+** BUILD FAILED **
+
+
+The following build commands failed:
+	PhaseScriptExecution [CP-User]\ Generate\ Specs /Users/wangruizhi/Library/Developer/Xcode/DerivedData/AwesomeProject-cmguwbdnndupmbfytmfamhipvjfa/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/React-Codegen.build/Script-46EB2E00015750.sh (in target 'React-Codegen' from project 'Pods')
+(1 failure)

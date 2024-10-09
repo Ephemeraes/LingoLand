@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="1321f889-5e5e-4d57-9b46-a049b726c01b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/.idea/LingoLand.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/.idea/checkstyle-idea.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLand/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLand/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLand/database/database.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLand/database/dictionary.ibd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLand/database/ecdict.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLand/mvnw" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLand/mvnw.cmd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLand/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLand/src/main/java/com/example/LingoLand/LingoLandApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLand/src/main/java/com/example/LingoLand/springbootmybatis/controller/WordController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLand/src/main/java/com/example/LingoLand/springbootmybatis/impl/WordServiceImpl.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLand/src/main/java/com/example/LingoLand/springbootmybatis/mapper/WordMapper.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLand/src/main/java/com/example/LingoLand/springbootmybatis/pojo/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLand/src/main/java/com/example/LingoLand/springbootmybatis/pojo/Word.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLand/src/main/java/com/example/LingoLand/springbootmybatis/service/WordService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLand/src/main/resources/application.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLand/src/test/java/com/example/LingoLand/LingoLandApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/controller/OCRController.java" beforeDir="false" afterPath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/controller/OCRController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/mapper/GrammarMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/mapper/GrammarMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/mapper/UserLoginLogMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/mapper/UserLoginLogMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/mapper/VocabularyBookMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/mapper/VocabularyBookMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/mapper/WordMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/mapper/WordMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/service/Impl/OCRServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/service/Impl/OCRServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/service/Impl/UserLoginLogServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/service/Impl/UserLoginLogServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/service/Impl/VocabularyBookServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/service/Impl/VocabularyBookServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/service/Impl/WordServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/service/Impl/WordServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/service/OCRService.java" beforeDir="false" afterPath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/service/OCRService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/service/UserLoginLogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/service/UserLoginLogService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/service/VocabularyBookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/service/VocabularyBookService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/service/WordService.java" beforeDir="false" afterPath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/service/WordService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/resources/application.yml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="SYNC" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/LingoLand_BackEnd/LingoLandVersion/src/main/java/com/lingoland/springbootmybatis/service/Impl/OCRServiceImpl.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="D:\Maven\maven-jar" />
+        <option name="mavenHome" value="D:\Maven\maven-3.6.3" />
+        <option name="userSettingsFile" value="D:\Maven\maven-3.6.3\maven-3.6.3\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2mY57ZVNa1eblU7TLLAVCooFf7X" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ChatGptApiApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.CombineApiApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.LingoLandApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/DECO7381&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\DECO7381\LingoLand_BackEnd\badword_chatbot\src\main" />
+      <recent name="C:\DECO7381\LingoLand_BackEnd\LingoLandVersion\src\main\java\com\lingoland\springbootmybatis\config" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="LingoLandApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="LingoLand" />
+      <option name="SHORTEN_COMMAND_LINE" value="ARGS_FILE" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.lingoland.LingoLandApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="SHORTEN_COMMAND_LINE" value="ARGS_FILE" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-17.0.10-corretto-17.0.10-4caba194b151-5cd809f4" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="1321f889-5e5e-4d57-9b46-a049b726c01b" name="Changes" comment="" />
+      <created>1727240523940</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1727240523940</updated>
+      <workItem from="1727240529292" duration="73000" />
+      <workItem from="1727241286019" duration="17434000" />
+      <workItem from="1727340478874" duration="5916000" />
+      <workItem from="1727396900967" duration="2311000" />
+      <workItem from="1727411981882" duration="3132000" />
+      <workItem from="1727439499640" duration="4976000" />
+      <workItem from="1727446735680" duration="4376000" />
+      <workItem from="1727482807688" duration="7580000" />
+      <workItem from="1727492841268" duration="17513000" />
+      <workItem from="1727626259044" duration="6281000" />
+      <workItem from="1727690293060" duration="16443000" />
+      <workItem from="1727865081255" duration="779000" />
+      <workItem from="1728010174114" duration="131000" />
+      <workItem from="1728436673175" duration="41000" />
+      <workItem from="1728438132538" duration="2466000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/LingoLand_BackEnd/badword_chatbot/src/main/java/com/example/chatbot/controller/ChatGPTController.java</url>
+          <line>25</line>
+          <properties field="client" class="com.example.chatbot.controller.ChatGPTController" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
