@@ -76,7 +76,7 @@ The backend is built with Java and Maven in order to provide an API interface fo
 ### Frontend Settings
 
 1.	Clone repository:
-git clone <repository_url>
+git clone https://github.com/Ephemeraes/LingoLand.git
 cd LingoLand
 2.	Install dependencies:
 npm install
@@ -87,13 +87,11 @@ Open the Expo Go app and scan the QR code in the developer tools/Expo Go
 
 ### Backend Settings
 
-1.	Enter the backend directory:
-cd LingoLand_BackEnd
-2.	Build project:
-mvn clean install
-3.	Running backend services:
-mvn spring-boot:run
-4.	Database settings:
+For every back-end project
+1.	Add maven resources
+Go to the pom.xml and download maven sources
+2. Reload the Project
+4.	Change atabase settings:
 Run the SQL script in the database folder to create the necessary tables.
 5. Link your database
 Change the settings of sql in pom.xml to your local database
