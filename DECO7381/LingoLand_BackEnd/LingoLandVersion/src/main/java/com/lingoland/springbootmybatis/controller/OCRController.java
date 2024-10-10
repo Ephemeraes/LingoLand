@@ -1,5 +1,6 @@
 package com.lingoland.springbootmybatis.controller;
 
+import com.lingoland.springbootmybatis.pojo.BadWords;
 import com.lingoland.springbootmybatis.pojo.ChatBot;
 import com.lingoland.springbootmybatis.pojo.Words;
 import com.lingoland.springbootmybatis.service.ChatBotService;
@@ -72,5 +73,11 @@ public class OCRController {
     @PostMapping("/postChatBot")
     public Integer setChatBot(@RequestBody ChatBot chatBot1){
         return chatBot.setChatBot(chatBot1);
+    }
+
+    @ApiOperation("getAllBadWords")
+    @GetMapping("/getAllBadWords")
+    public List<BadWords> getAllBadwords(){
+        return ocr.getAllBadWords();
     }
 }

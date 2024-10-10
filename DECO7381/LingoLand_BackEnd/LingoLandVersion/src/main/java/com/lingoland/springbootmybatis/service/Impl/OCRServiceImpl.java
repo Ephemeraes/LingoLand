@@ -5,8 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.cloud.translate.Translate;
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
+import com.lingoland.springbootmybatis.mapper.BadWordsMapper;
 import com.lingoland.springbootmybatis.mapper.UserLoginLogMapper;
 import com.lingoland.springbootmybatis.mapper.WordsMapper;
+import com.lingoland.springbootmybatis.pojo.BadWords;
 import com.lingoland.springbootmybatis.pojo.Words;
 import com.lingoland.springbootmybatis.service.OCRService;
 import net.sourceforge.tess4j.Tesseract;
@@ -20,12 +22,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 // Method to convert an image file to a String using Tesseract OCR
 @Service
 public class OCRServiceImpl implements OCRService {
     @Autowired
     private WordsMapper wordsMapper;
+    @Autowired
+    private BadWordsMapper badWordsMapper;
     //private OCRService ocrService;
     // Method to translate text from one language to another using Google Cloud Translation API
     @Override
@@ -54,17 +59,11 @@ public class OCRServiceImpl implements OCRService {
 
     @Override
     public boolean sensitiveWords(String word){
-        ObjectMapper mapper = new ObjectMapper();
-        List<String> badWords = new ArrayList<>();
-        try {
-            badWords = (List<String>) mapper.readValue(new File("C:\\DECO7381\\LingoLand_BackEnd\\badword_chatbot\\src\\badwords\\words.json"), Map.class).get("bad");
-        } catch (IOException e){
-            return false;
-        }
+        List<BadWords> allByBadWords = badWordsMapper.getAllByBadWords();
+        List<String> badWords = allByBadWords.stream().map(BadWords::getWords).map(String::toLowerCase).collect(Collectors.toList());
         word = word.toLowerCase();
         for(String i:badWords){
-            i = i.toLowerCase();
-            if (word.contains(i)){
+            if (word.equals(i)){
                 return true;
             }
         }
@@ -80,5 +79,10 @@ public class OCRServiceImpl implements OCRService {
     @Override
     public Integer insertWords(Words words){
         return wordsMapper.insertWords(words);
+    }
+
+    @Override
+    public List<BadWords> getAllBadWords() {
+        return badWordsMapper.getAllByBadWords();
     }
 }

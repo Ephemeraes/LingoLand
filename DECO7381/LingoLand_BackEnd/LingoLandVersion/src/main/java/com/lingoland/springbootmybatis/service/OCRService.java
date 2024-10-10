@@ -1,5 +1,6 @@
 package com.lingoland.springbootmybatis.service;
 
+import com.lingoland.springbootmybatis.pojo.BadWords;
 import com.lingoland.springbootmybatis.pojo.Words;
 import net.sourceforge.tess4j.TesseractException;
 
@@ -12,4 +13,5 @@ public interface OCRService {
     public boolean sensitiveWords(String word);
     public List<Words> getAllResult(int userId);
     public Integer insertWords(Words words);
+    public List<BadWords> getAllBadWords();
 }
