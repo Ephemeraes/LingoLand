@@ -15,54 +15,109 @@ This project includes a front-end application and a Java Maven back-end service,
 
 LingoLand/
 │
-├── assets/                  # Contains static resources such as images and fonts
+├── README.md # Project documentation
 │
-├── src/                     # Application source code
-│   ├── components/          # Reusable React components
-│   └── pages/               # Various pages of the application
+├── LingoLand/ # Front-end project folder
+│ ├── assets/ # Static resources, such as images and fonts
+│ ├── src/ # Application source code
+│ │ ├── components/ # Reusable React components
+│ │ └── pages/ # Various pages/interfaces of the application
+│ ├── ios/ # iOS specific code and configuration
+│ ├── app.json # Expo configuration file
+│ ├── babel.config.js # Babel compiler configuration
+│ ├── metro.config.js # Metro packaging tool configuration
+│ ├── index.js # Application entry file
+│ ├── package.json # Project dependencies and scripts
+│ └── yarn.lock # Dependency version lock file
 │
-├── ios/                     # iOS-specific code and project configurations
-│
-├── app.json                 # Expo configuration file
-├── babel.config.js          # Babel compiler configuration
-├── metro.config.js          # Metro bundler configuration
-├── index.js                 # Application entry point
-├── package.json             # Project dependencies and scripts
-└── yarn.lock                # Dependency version lock file
+└── LingoLand_BackEnd/ # Backend project folder
+├── badword_chatbot/ # ChatBot module for filtering bad words
+├── LingoLandVersion/ # Backend version implementation
+├── src/ # Back-end Java source code
+├── target/ # Maven build output
+├── pom.xml # Maven project configuration file
+└── database/ # Database setup scripts
 
-### Back-end (`LingoLand_BackEnd`)
+### Frontend Overview
 
-- **`/src`**: Contains source code and resources.
-- **`/target`**: Includes Maven build outputs.
-- **`pom.xml`**: Maven project configuration file.
-- **`database`**: Contains database-related scripts.
+The front-end is built with React Native and Expo in order to achieve a cross-platform user experience for iOS and Android users.
 
-## Installation and Running Instructions
+1.	Components: Reusable components, such as buttons, titles, and input boxes.
+2.	Pages: Various pages of the app, such as HomeScreen, LoginScreen, ProfileScreen, and WordSpellScreen.
+3.	Expo: Testing and deploying mobile applications.
 
-### Front-end Application
+Note: For all fetch and get requests in the front-end interfaces, please change the default server address to your own IP address.
 
-To set up and run the front-end application, please follow these steps:
+### Backend Overview
 
-1. **Environment Setup**: Ensure your development environment has Node.js and npm installed. Visual Studio Code is recommended as the development environment.
-2. **Acquire Project Files**:
-   - If the project files have been directly provided to you via USB, network drive, or other means, ensure they are saved on your local system.
-3. **Enter Project Directory**:
-   ```bash
-   cd ./LingoLand
-4. **Install Dependencies**：
-   ```bash
-   npm install
-5. **Start the Application**：
-   ```bash
-   npm start
-   - 此命令将启动一个开发服务器，并打开一个新的浏览器窗口或标签页显示 Expo 开发者具。
-6. **Preview the Application on Your Phone**：
-   - Ensure your phone has the Expo Go app installed (available from the App Store or Google Play).
-   - Use the Expo Go app to scan the QR code displayed on the Developer Tools page.
-   - Ensure your phone and the computer running the development server are on the same network.
+The backend is built with Java and Maven in order to provide an API interface for interaction with the front end, and includes the following features:
 
-## Contact Information
+1.	User authentication: Secure login and registration.
+2.	Data management: User data processing, progress tracking and content management.
+3.	ChatBot: A chat module that provides further learning support.
+4.	Database: Contains SQL scripts for setting up the database.
 
-**Project Lead**: [Langdi Li] - [langdi.li@uqconnect.edu.au]
+### Function
 
-Please contact the project lead with any questions or suggestions regarding the project.
+1.	Interactive learning: Daily tasks, grammar exercises, word spelling and quizzes, etc.
+2.	Progress tracking: Users are able to view and track their learning progress and achievements.
+3.	ChatBot support: Provide assistance and ensure the security of the conversation content.
+4.	Personal data management: Allows users to update personal settings and information.
+5.	Cross-platform support: Utilise Expo to run on both iOS and Android.
+
+## Installation and Setup
+
+### Prerequisite
+
+1.	Node.js and npm are used to run the front-end.
+2.	Java JDK (17 and above) and Maven are used for the backend. 
+3.	Expo Go application: Designed to test the front-end on mobile devices.
+
+### Frontend Settings
+
+1.	Clone repository:
+git clone <repository_url>
+cd LingoLand
+2.	Install dependencies:
+npm install
+3.	Run the application: Open Expo Developer Tools
+npm start
+4.	Mobile terminal test:
+Open the Expo Go app and scan the QR code in the developer tools/Expo Go
+
+### Backend Settings
+
+1.	Enter the backend directory:
+cd LingoLand_BackEnd
+2.	Build project:
+mvn clean install
+3.	Running backend services:
+mvn spring-boot:run
+4.	Database settings:
+Run the SQL script in the database folder to create the necessary tables.
+5. Link your database
+Change the settings of sql in pom.xml to your local database
+
+### Run the Complete Application
+
+1.	Ensure that both the front-end and back-end services have been started.
+2.	The baseUrl in the new front-end configuration matches the address of the backend server.
+
+## Usage Method
+
+1.	Registration/Login: Create a new account or log in with an existing account.
+2.	Learning: Engage in learning modules such as word spelling, daily tasks, and grammar exercises.
+3.	Progress tracking: View your learning progress and achievements on your profile page.
+4.	ChatBot: Get further personalised learning help and guidance.
+5.	Personal information management: Update user personal settings and information.
+
+## Team Members
+
+1.  Yue Yang
+2.  Haitao Zhao
+3.  Langdi Li
+4.  Xianglong Lin
+5.  Jiaqi Zhang
+6.  Yiqing Sheng
+
+For any questions, suggestions, or issues, please contact the team.
