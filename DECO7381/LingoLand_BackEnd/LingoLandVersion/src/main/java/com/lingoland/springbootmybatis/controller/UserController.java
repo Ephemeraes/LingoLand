@@ -18,6 +18,7 @@ import java.util.*;
 @Api(tags = "user controller")
 @RestController
 @RequestMapping("/user")
+@CrossOrigin(origins="http://localhost:8083")
 public class UserController {
 
     @Autowired
