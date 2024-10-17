@@ -14,4 +14,5 @@ public interface OCRService {
     public List<Words> getAllResult(int userId);
     public Integer insertWords(Words words);
     public List<BadWords> getAllBadWords();
+
 }

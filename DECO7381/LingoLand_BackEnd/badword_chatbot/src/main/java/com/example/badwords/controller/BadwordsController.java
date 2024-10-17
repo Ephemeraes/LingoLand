@@ -1,20 +1,16 @@
 package com.example.badwords.controller;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import com.example.badwords.model.BadWord;
+import com.example.badwords.repository.BadWordRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * The BadwordsController class handles bad words management and provides RESTful API
@@ -22,197 +18,160 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/badwords")
+@CrossOrigin(origins = "http://localhost:8082")
 public class BadwordsController {
 
-    // Singleton instance to ensure only one instance of BadwordsController exists
-    private static BadwordsController instance;
-
-    // JSONObject to hold the list of bad words read from the JSON file
-    private JSONObject jsonObject;
-
-    // Private constructor to initialise the bad words list from a JSON file on application startup
-    private BadwordsController() {
-        JSONParser parser = new JSONParser();
-        try {
-            // Parse the bad words from a JSON file located in the "src/badwords/words.json" path
-            Object obj = parser.parse(new FileReader("C:\\DECO7381\\LingoLand_BackEnd\\badword_chatbot\\src\\badwords\\words.json"));
-            jsonObject = (JSONObject) obj;
-        } catch (IOException | ParseException ex) {
-            Logger.getLogger(BadwordsController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    // Method to return the singleton instance of BadwordsController
-    public static BadwordsController getInstance() {
-        if (instance == null) {
-            instance = new BadwordsController();
-        }
-        return instance;
-    }
+    @Autowired
+    private BadWordRepository badWordRepository;
 
     /**
-     * API Endpoint to retrieve all bad words.
+     * API Endpoint to retrieve all bad words for a specific user and the default list (userId=0).
      *
-     * @return A list of all bad words in JSON format.
+     * @param userId The ID of the user whose bad words are being retrieved.
+     * @return A list of all bad words for the specified user and the default list.
      */
     @GetMapping("/list")
-    public Map<String, Object> showBadWords() {
-        JSONArray badWordsList = (JSONArray) jsonObject.get("bad");
+    public Map<String, Object> showBadWords(@RequestParam("userId") String userId) {
+        int userIdInt = Integer.parseInt(userId);
+
+        // Retrieve both user-specific and default bad words (userId = 0)
+        List<BadWord> badWordsList = badWordRepository.findByUserIdOrUserId(userIdInt, 0);
+
         Map<String, Object> response = new HashMap<>();
-        response.put("badWords", badWordsList);
+        response.put("badWords", badWordsList); // Return all fields from the table
         return response;
     }
 
     /**
-     * API Endpoint to add new bad words to the list.
+     * API Endpoint to check if the input string contains any bad words for a specific user.
+     * It will check both the user-specific bad words and the default list (userId = 0).
      *
-     * @param requestBody A string of space-separated words to be added to the bad words list.
-     * @return A success message after adding the words, or an error message if the operation fails.
-     */
-    @PostMapping("/edit")
-    public Map<String, String> editBadWords(@RequestBody Map<String, String> requestBody) {
-        String words = requestBody.get("words");
-        // Split the input string into an array of words
-        String[] wordArray = words.trim().split(" ");
-        JSONArray badWordsList = (JSONArray) jsonObject.get("bad");
-
-        // Add each new word to the bad words list
-        for (String word : wordArray) {
-            badWordsList.add(word);
-        }
-
-        // Update the JSON object and write the changes back to the file
-        jsonObject.put("bad", badWordsList);
-        try (FileWriter file = new FileWriter("src/badwords/words.json")) {
-            file.write(jsonObject.toJSONString());
-            file.flush();
-        } catch (IOException e) {
-            Logger.getLogger(BadwordsController.class.getName()).log(Level.SEVERE, null, e);
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("message", "Error updating bad words");
-            return errorResponse;
-        }
-
-        // Return a success message
-        Map<String, String> response = new HashMap<>();
-        response.put("message", "Bad words updated successfully");
-        return response;
-    }
-
-    /**
-     * API Endpoint to delete bad words from the list.
-     *
-     * @param requestBody A string containing space-separated bad words to be removed.
-     * @return A success message if the words are removed, or an error message if the operation fails.
-     */
-    @DeleteMapping("/delete")
-    public Map<String, String> deleteBadWords(@RequestBody Map<String, String> requestBody) {
-        String words = requestBody.get("words");
-        // Split the input string into an array of words
-        String[] wordArray = words.trim().split(" ");
-        JSONArray badWordsList = (JSONArray) jsonObject.get("bad");
-
-        // Remove each word from the bad words list
-        for (String word : wordArray) {
-            badWordsList.removeIf(badWord -> ((String) badWord).equalsIgnoreCase(word));
-        }
-
-        // Update the JSON object and write the changes back to the file
-        jsonObject.put("bad", badWordsList);
-        try (FileWriter file = new FileWriter("src/badwords/words.json")) {
-            file.write(jsonObject.toJSONString());
-            file.flush();
-        } catch (IOException e) {
-            Logger.getLogger(BadwordsController.class.getName()).log(Level.SEVERE, null, e);
-            Map<String, String> errorResponse = new HashMap<>();
-            errorResponse.put("message", "Error deleting bad words");
-            return errorResponse;
-        }
-
-        // Return a success message
-        Map<String, String> response = new HashMap<>();
-        response.put("message", "Bad words deleted successfully");
-        return response;
-    }
-
-    /**
-     * API Endpoint to check if the input string contains any bad words.
-     *
-     * @param requestBody A string input to be checked for bad words.
+     * @param input  The input text to be checked.
+     * @param userId The user ID for whom the bad words are being checked.
      * @return A response indicating whether the input contains bad words.
      */
     @PostMapping("/check")
-    public Map<String, Object> containsBadWord(@RequestBody Map<String, String> requestBody) {
-        String input = requestBody.get("input");
-        JSONArray badWordsList = (JSONArray) jsonObject.get("bad");
+    public Map<String, Object> containsBadWord(@RequestParam("input") String input, @RequestParam("userId") String userId) {
+        int userIdInt = Integer.parseInt(userId);
 
-        boolean containsBadWord = false;
-        // Iterate through the bad words list and check if the input contains any bad word
-        Iterator<String> iterator = badWordsList.iterator();
-        while (iterator.hasNext()) {
-            if (input.contains(iterator.next())) {
-                containsBadWord = true;
-                break;
-            }
-        }
+        // Retrieve both user-specific and default bad words (userId = 0)
+        List<BadWord> badWordsList = badWordRepository.findByUserIdOrUserId(userIdInt, 0);
 
-        // Return whether bad words were found
+        boolean containsBadWord = badWordsList.stream()
+                .anyMatch(badWord -> input.contains(badWord.getWord()));
+
         Map<String, Object> response = new HashMap<>();
         response.put("containsBadWord", containsBadWord);
         return response;
     }
 
     /**
-     * API Endpoint to count how many bad words are in the input string.
+     * API Endpoint to count how many bad words are in the input string for a specific user.
+     * It will count words from both the user-specific bad words and the default list (userId = 0).
      *
-     * @param requestBody A string input to be checked.
+     * @param input  The input text to be counted.
+     * @param userId The user ID for whom the bad words are being counted.
      * @return The count of bad words found in the input string.
      */
     @PostMapping("/count")
-    public Map<String, Object> countBadWords(@RequestBody Map<String, String> requestBody) {
-        String input = requestBody.get("input");
-        int count = 0;
-        JSONArray badWordsList = (JSONArray) jsonObject.get("bad");
+    public Map<String, Object> countBadWords(@RequestParam("input") String input, @RequestParam("userId") String userId) {
+        int userIdInt = Integer.parseInt(userId);
 
-        // Count the number of bad words found in the input string
-        Iterator<String> iterator = badWordsList.iterator();
-        while (iterator.hasNext()) {
-            if (input.contains(iterator.next())) {
+        // Retrieve both user-specific and default bad words (userId = 0)
+        List<BadWord> badWordsList = badWordRepository.findByUserIdOrUserId(userIdInt, 0);
+
+        int count = 0;
+        for (BadWord badWord : badWordsList) {
+            if (input.contains(badWord.getWord())) {
                 count++;
             }
         }
 
-        // Return the count of bad words
         Map<String, Object> response = new HashMap<>();
         response.put("badWordCount", count);
         return response;
     }
 
     /**
-     * API Endpoint to remove or replace bad words from the input string.
-     * Bad words are replaced with asterisks by default.
+     * API Endpoint to add new bad words for a specific user.
+     * Only operates on user-specific bad words, does not affect the default list.
      *
-     * @param requestBody A JSON object containing the input string to be modified.
-     * @return The modified string with bad words removed or replaced.
+     * @param words  The words to be added.
+     * @param userId The user ID to whom the bad words are being added.
+     * @return A success message after adding the words.
      */
-    @PostMapping("/remove")
-    public Map<String, Object> removeBadWords(@RequestBody Map<String, String> requestBody) {
-        String input = requestBody.get("input");
-        JSONArray badWordsList = (JSONArray) jsonObject.get("bad");
+    @PostMapping("/add")
+    public Map<String, String> addBadWords(@RequestParam("words") String words, @RequestParam("userId") String userId) {
+        int userIdInt = Integer.parseInt(userId);
+        String[] wordArray = words.trim().split(" ");
 
-        // Iterate through the bad words list and replace them in the input string
-        Iterator<String> iterator = badWordsList.iterator();
-        while (iterator.hasNext()) {
-            String badWord = iterator.next();
-            if (input.contains(badWord)) {
-                // Replace bad words with asterisks (you can replace with an empty string if needed)
-                input = input.replaceAll(badWord, "*".repeat(badWord.length()));
-            }
+        // Save each word in the database for the user
+        for (String word : wordArray) {
+            BadWord badWord = new BadWord(word, userIdInt);
+            badWordRepository.save(badWord);
         }
 
-        // Return the modified string
-        Map<String, Object> response = new HashMap<>();
-        response.put("modifiedInput", input);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Bad words added successfully");
         return response;
+    }
+
+    /**
+     * API Endpoint to edit bad words for a specific user.
+     * Only operates on user-specific bad words, does not affect the default list.
+     *
+     * @param badWordsId The ID of the bad word to edit.
+     * @param newWord    The new word to replace the old one.
+     * @return A success message after updating the word.
+     */
+    @PutMapping("/edit")
+    public Map<String, String> editBadWords(@RequestParam("badWordsId") String badWordsId, @RequestParam("word") String newWord) {
+
+        // Find the bad word entry by id and update it
+        Optional<BadWord> badWordOptional = badWordRepository.findById(Integer.parseInt(badWordsId));
+        if (badWordOptional.isPresent()) {
+            BadWord badWord = badWordOptional.get();
+            badWord.setWord(newWord);
+            badWordRepository.save(badWord);
+        }
+
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Bad word updated successfully");
+        return response;
+    }
+
+    /**
+     * API Endpoint to delete specific bad words for a user.
+     * Only operates on user-specific bad words, does not affect the default list.
+     *
+     * @param words bad word to delete.
+     * @param userId The user ID from which to delete the bad words.
+     * @return A JSON string containing a success message after deletion.
+     * @throws JsonProcessingException If there is an error during JSON processing.
+     */
+    @DeleteMapping("/delete")
+    public String deleteBadWords(@RequestParam("words") String words, @RequestParam("userId") String userId) throws JsonProcessingException {
+        int userIdInt = Integer.parseInt(userId);
+        
+        // Find records matching the given words and userId
+        List<BadWord> badWordsList = badWordRepository.findByWordAndUserId(words, userIdInt);
+        Map<String, String> response = new HashMap<>();
+        ObjectMapper jsonObjectMapper = new ObjectMapper();
+        if (badWordsList.isEmpty()) {
+            response.put("code", String.valueOf(0));
+            response.put("message", "Bad word(s) deleted failed");
+            String responseJson = "";
+            responseJson = jsonObjectMapper.writeValueAsString(response);
+            return responseJson;
+        }
+
+        // Delete matching records
+        badWordRepository.deleteAll(badWordsList);
+
+        response.put("code", String.valueOf(1));
+        response.put("message", "Bad word(s) deleted successfully");
+        String responseJson = "";
+        responseJson = jsonObjectMapper.writeValueAsString(response);
+        return responseJson;
     }
 }

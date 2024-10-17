@@ -36,7 +36,7 @@ public class OCRServiceImpl implements OCRService {
     @Override
     public String imageToString(File file) throws TesseractException {
         Tesseract tesseract = new Tesseract();
-        tesseract.setDatapath("D:/OCR/tessdata");
+        tesseract.setDatapath("E:/tesseract/tessdata");
         String result = tesseract.doOCR(file);
         //System.out.println(result);
         return result;
@@ -59,14 +59,20 @@ public class OCRServiceImpl implements OCRService {
 
     @Override
     public boolean sensitiveWords(String word){
+        // Retrieve the list of all bad words from the badWordsMapper
         List<BadWords> allByBadWords = badWordsMapper.getAllByBadWords();
+        // Convert the list of BadWords objects to a list of lowercase strings (bad words)
         List<String> badWords = allByBadWords.stream().map(BadWords::getWords).map(String::toLowerCase).collect(Collectors.toList());
+        // Convert the input word to lowercase for case-insensitive comparison
         word = word.toLowerCase();
+        // Loop through each bad word in the list
         for(String i:badWords){
-            if (word.equals(i)){
-                return true;
+            // Check if the input word contains any bad word
+            if (word.contains(i)){
+                return true;// Return true if a match is found
             }
         }
+        // Return false if no bad words are found in the input word
         return false;
 
     }

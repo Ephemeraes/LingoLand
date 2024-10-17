@@ -80,4 +80,5 @@ public class OCRController {
     public List<BadWords> getAllBadwords(){
         return ocr.getAllBadWords();
     }
+
 }

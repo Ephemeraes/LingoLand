@@ -6,10 +6,7 @@ import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Response;
@@ -20,6 +17,7 @@ import okhttp3.Response;
  */
 @RestController
 @RequestMapping("/api/chatgpt")
+@CrossOrigin(origins = "http://localhost:8082")
 public class ChatGPTController {
 
     // OkHttpClient instance used to make HTTP requests to the ChatGPT API
@@ -57,7 +55,7 @@ public class ChatGPTController {
             JSONArray newMessages = new JSONArray(); // Array to hold the new conversation messages
             JSONObject systemMessage = new JSONObject(); // System message that defines the conversation context
             systemMessage.put("role", "system");
-            systemMessage.put("content", "You are an intelligent assistant helping users with English grammar learning and practice.");
+            systemMessage.put("content", "You are an intelligent assistant helping children users with Chinese and English grammar learning and practice. All content should be answered in both English and Chinese. 你是一个智能助手，帮助儿童用户学习和练习中文和英文语法。所有内容都需要用中英文双语回答。");
             newMessages.put(systemMessage); // Add system message to the conversation
             conversationTopics.put(topicId, newMessages); // Save the new conversation in the map with the topicId
 
