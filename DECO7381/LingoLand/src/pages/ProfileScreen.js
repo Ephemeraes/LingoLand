@@ -80,7 +80,7 @@ export default function ProfileScreen() {
             );
 
             const userId = userData?.id;
-            const apiUrl = `http://192.168.31.40:8081/user/validate/parentalPassword?parentalPassword=${hashedInputPassword}&userId=${userId}`;
+            const apiUrl = `http://10.71.95.219:8081/user/validate/parentalPassword?parentalPassword=${hashedInputPassword}&userId=${userId}`;
 
             // Send a GET request to verify the parental control password
             const response = await fetch(apiUrl, {
@@ -110,12 +110,26 @@ export default function ProfileScreen() {
         }
     };
 
+    const linkToSetting = () => {
+        navigation.navigate("SettingScreen")
+    }
+
     return (
         <ImageBackground
             source={require('../../assets/Interface/Profile Interface/background.jpg')}
             style={styles.backgroundImage}
         >
             <Header title="Profile" goToScreen="Home" />
+
+            <TouchableOpacity
+            style={styles.topRightButton}
+            onPress={linkToSetting}
+            >
+                <Image
+                source={require('../../assets/Interface/Profile Interface/setting.gif')}
+                style={styles.topRightIcon}
+                />
+            </TouchableOpacity>
 
             {/* User Section */}
             <View style={styles.userSection}>
@@ -139,7 +153,7 @@ export default function ProfileScreen() {
                 </TouchableOpacity>
 
                 <TouchableOpacity style={styles.menuButton} onPress={() => navigation.navigate('ChatBox')}>
-                    <Text style={styles.menuText}>Chat Box</Text>
+                    <Text style={styles.menuText}>Chat Bot</Text>
                 </TouchableOpacity>
             </View>
 
@@ -303,5 +317,15 @@ const getStyles = (width, height) => StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    topRightButton: {
+        position: "absolute",
+        top: 50,
+        right: 20,
+    },
+    topRightIcon: {
+        width:width*0.1,
+        height: height*0.05,
     }
+    
 });

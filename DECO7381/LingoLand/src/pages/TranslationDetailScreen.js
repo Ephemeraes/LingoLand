@@ -53,7 +53,7 @@ export default function TranslationDetailScreen({ route }) {
                 </View>
 
                 {/* Prompts for chatbox */}
-                <TouchableOpacity onPress={() => navigation.navigate('ChatBox', route.params)}>
+                <TouchableOpacity onPress={() => navigation.navigate('ChatBoxHistory', route.params)}>
                     <Image
                         source={require('../../assets/Interface/Translation Detail/askChat.png')}
                         style={styles.chatboxImage}

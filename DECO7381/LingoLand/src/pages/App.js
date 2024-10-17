@@ -16,6 +16,7 @@ import NotebookSentenceDetailScreen from './NotebookSentenceDetailScreen';
 import AchievementScreen from './AchievementScreen';
 import CourseModuleScreen from './CourseModuleScreen';
 import ChatBoxScreen from './ChatBoxScreen';
+import ChatBoxHistoryScreen from './ChatBoxHistoryScreen';
 import PhotoTranslationScreen from './PhotoTranslationScreen';
 import ParentalModelScreen from './ParentalModelScreen';
 import SensitiveWordsScreen from './SensitiveWordsScreen';
@@ -35,11 +36,19 @@ import DailyReviewScreen from './DailyReviewScreen';
 import GrammerTopicScreen from './GrammerTopicScreen';
 import GrammerTopicExplanationScreen from './GrammerTopicExplanationScreen';
 import DailyTaskCompleteScreen from './DailyTaskCompleteScreen';
+import SettingScreen from './SettingScreen';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
+import {Image,ImageBackground} from 'react-native';
+import homeIcon from '../../assets/Interface/home page/home.png';
+import barIcon from '../../assets/Interface/home page/bar.gif';
+import cameraIcon from '../../assets/Interface/home page/camera.gif';
+import noteIcon from '../../assets/Interface/home page/nn.png';
+import dictionaryIcon from '../../assets/Interface/home page/note.gif';
+import profileIcon from '../../assets/Interface/home page/Profile-button.gif';
 
 SplashScreen.preventAutoHideAsync();
 const Stack = createStackNavigator();
@@ -78,23 +87,27 @@ export default function App() {
             let iconName;
 
             if (route.name === 'Home') {
-              iconName = focused ? 'home' : 'home-outline';
+              iconName = homeIcon;
             } else if (route.name === 'Dictionary') {
-              iconName = focused ? 'book' : 'book-outline';
+              iconName = dictionaryIcon;
             } else if (route.name === 'NoteBook') {
-              iconName = focused ? 'document-text' : 'document-text-outline';
+              iconName = noteIcon;
             } else if (route.name === 'Profile') {
-              iconName = focused ? 'person' : 'person-outline';
+              iconName = profileIcon;
             } else if (route.name === 'CourseModule') {
               iconName = focused ? 'document' : 'document-outline';
             } else if (route.name === 'ChatBox') {
               iconName = focused ? 'chatbubble' : 'chatbubble-outline';
             } else if (route.name === 'PhotoTranslate') {
-              iconName = focused ? 'camera' : 'camera-outline';
+              iconName = cameraIcon;
             }
 
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
+            return <Image source = {iconName} style={{width:40,height:50}}/>;
+          },    
+          tabBarShowLabel: false,      
+          tabBarBackground: () => (<ImageBackground source = {barIcon} style={{width:'100%',height:'100%'}}
+          />
+          ),
           tabBarActiveTintColor: 'tomato',
           tabBarInactiveTintColor: 'gray',
           tabBarStyle: { display: 'flex' },
@@ -123,11 +136,13 @@ export default function App() {
         <Tab.Screen name="DailyTaskComplete" component={DailyTaskCompleteScreen} options={{ headerShown: false, tabBarButton: () => null }} />
         <Tab.Screen name="CourseModule" component={CourseModuleScreen} options={{ headerShown: false, tabBarButton: () => null }} />
         <Tab.Screen name="ChatBox" component={ChatBoxScreen} options={{ headerShown: false, tabBarButton: () => null }} />
+        <Tab.Screen name="ChatBoxHistory" component={ChatBoxHistoryScreen} options={{ headerShown: false, tabBarButton: () => null }} />
         <Tab.Screen name="ParentalModel" component={ParentalModelScreen} options={{ headerShown: false, tabBarButton: () => null }} />
         <Tab.Screen name="SensitiveWords" component={SensitiveWordsScreen} options={{ headerShown: false, tabBarButton: () => null }} />
         <Tab.Screen name="WordDetail" component={WordDetailScreen} options={{ headerShown: false, tabBarButton: () => null }} />
         <Tab.Screen name="TranslationDetail" component={TranslationDetailScreen} options={{ headerShown: false, tabBarButton: () => null }} />
         <Tab.Screen name="NotebookSentenceDetail" component={NotebookSentenceDetailScreen} options={{ headerShown: false, tabBarButton: () => null }} />
+        <Tab.Screen name="SettingScreen" component={SettingScreen} options={{ headerShown: false, tabBarButton: () => null }} />
       </Tab.Navigator>
     );
   }

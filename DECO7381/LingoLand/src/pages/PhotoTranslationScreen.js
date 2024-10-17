@@ -1,10 +1,11 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet, Dimensions, ImageBackground, Alert, Modal } from 'react-native';
+import { View, Text, TouchableOpacity, Image, StyleSheet, Dimensions, ImageBackground, Alert, Modal, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import * as ImagePicker from 'expo-image-picker';
 import Header from '../components/Header';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
+import AppLoading from 'expo-app-loading';
 
 
 /**
@@ -20,6 +21,7 @@ export default function PhotoTranslationScreen() {
     const { width, height } = Dimensions.get('window');
     const styles = getStyles(width, height);
 
+    const [loading, setLoading] = useState(false);
     /**
      * openCamera function: 
      * request camera permission and open the camera, 
@@ -29,84 +31,116 @@ export default function PhotoTranslationScreen() {
      * camera cannot be accessed or when uploading photos fails.
      */
     const openCamera = async () => {
-        // Request camera privileges
-        const { status } = await ImagePicker.requestCameraPermissionsAsync();
-        if (status !== 'granted') {
-            Alert.alert('Requires camera privileges', 'We need camera permissions to continue using this feature.');
-            return;
-        }
-        // Launches the camera
-        const result = await ImagePicker.launchCameraAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            allowsEditing: true,
-            base64: true
-        });
-        // Getting user data
-        const userDataString = await AsyncStorage.getItem('userData');
-        const userData = JSON.parse(userDataString);
-        const userId = userData.id;
-
-        // If the user has not taken a photo, it returns directly
-        if (result.canceled) {
-            return;
-        }
-        // Prepare data to be sent to the backend
-        const formData = new FormData();
-        const fileName = 'image.jpg';
-        const type = result.assets[0].mimeType;
-        const uri = result.assets[0].uri;
-        formData.append('file', {
-            uri: uri,
-            type: type,
-            name: fileName,
-        });
-
-        try {
-            // Upload images to the backend for translation
-            const translation = await fetch('http://192.168.31.40:8081/ocr/uploadImage', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-                body: formData
-            })
-            const data = await translation.json();
-            // Recording of translation results
-            setTranslatedData(data);
-
-            try {
-                let words;
-                // If no sensitive terms are included, the translation data is saved
-                if (data.sensitive === 'false') {
-                    words = {
-                        oriWords: data.ori,
-                        translatedWords: data.des,
-                        userId: userId,
-                    };
-                    // Saving translation data to the backend
-                    if (words) {
-                        const saveWords = await fetch('http://192.168.31.40:8081/ocr/insertWords', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(words),
-                        });
-                        navigation.navigate('TranslationDetail', words);
+        setLoading(true);
+        //The uploaded photos must have black text on a white background
+        try{
+            Alert.alert(
+                "title",
+                "上传的照片需白底黑字",
+                [
+                    {
+                    text: "confirm",
+                    onPress: async () => {
+                        try{
+                            // Request camera privileges
+                            const { status } = await ImagePicker.requestCameraPermissionsAsync();
+                            if (status !== 'granted') {
+                                Alert.alert('Requires camera privileges', 'We need camera permissions to continue using this feature.');
+                                return;
+                            }
+                            // Launches the camera
+                            const result = await ImagePicker.launchCameraAsync({
+                                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                                allowsEditing: true,
+                                base64: true
+                            });
+                            // Getting user data
+                            const userDataString = await AsyncStorage.getItem('userData');
+                            const userData = JSON.parse(userDataString);
+                            const userId = userData.id;
+                    
+                            // If the user has not taken a photo, it returns directly
+                            if (result.canceled) {
+                                return;
+                            }
+                            // Prepare data to be sent to the backend
+                            const formData = new FormData();
+                            const fileName = 'image.jpg';
+                            const type = result.assets[0].mimeType;
+                            const uri = result.assets[0].uri;
+                            formData.append('file', {
+                                uri: uri,
+                                type: type,
+                                name: fileName,
+                            });
+                    
+                            try {
+                                // Upload images to the backend for translation
+                                const translation = await fetch('http://10.71.95.219:8081/ocr/uploadImage', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'multipart/form-data',
+                                    },
+                                    body: formData
+                                })
+                                const data = await translation.json();
+                                // Recording of translation results
+                                setTranslatedData(data);
+                    
+                                try {
+                                    let words;
+                                    // If no sensitive terms are included, the translation data is saved
+                                    if (data.sensitive === 'false') {
+                                        words = {
+                                            oriWords: data.ori,
+                                            translatedWords: data.des,
+                                            userId: userId,
+                                        };
+                                        // Saving translation data to the backend
+                                        if (words) {
+                                            const saveWords = await fetch('http://10.71.95.219:8081/ocr/insertWords', {
+                                                method: 'POST',
+                                                headers: {
+                                                    'Content-Type': 'application/json',
+                                                },
+                                                body: JSON.stringify(words),
+                                            });
+                                            navigation.navigate('TranslationDetail', words);
+                                        }
+                                    }
+                                    // Pop-up alert if it contains sensitive words
+                                    if (data.sensitive === 'true') {
+                                        setModalVisible(true);
+                                    }
+                                } catch (error) {
+                                    console.error('Cannot store data', error);
+                                    Alert.alert('Store Failed', 'There was an error when storing the image.');
+                                }
+                            } catch (error) {
+                                console.error('Image upload failed:', error);
+                                Alert.alert('Upload failed', 'There was an error uploading the image.');
+                            }
+                       
+                    }catch (error) {
+                        console.error('Error:', error);
+                      } 
                     }
                 }
-                // Pop-up alert if it contains sensitive words
-                if (data.sensitive === 'true') {
-                    setModalVisible(true);
-                }
-            } catch (error) {
-                console.error('Cannot store data', error);
-                Alert.alert('Store Failed', 'There was an error when storing the image.');
-            }
-        } catch (error) {
-            console.error('Image upload failed:', error);
-            Alert.alert('Upload failed', 'There was an error uploading the image.');
+            
+                    
+                    
+                ],
+                {cancelable: false}
+
+            )
         }
+     
+    catch (error) {
+        console.error('Error fetching vocabulary data:', error);
+        Alert.alert('Error', 'Unable to load vocabulary data');
+      } finally {
+        setLoading(false);
+      }
     };
 
     /**
@@ -118,6 +152,15 @@ export default function PhotoTranslationScreen() {
      * the gallery cannot be accessed or when uploading photos fails.
      */
     const openImageLibrary = async () => {
+        setLoading(true);
+        try{
+            Alert.alert(
+                "title",
+                "上传的照片需白底黑字",
+                [
+                    {
+                    text: "confirm",
+                    onPress: async () => {
         // Request access to albums
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (status !== 'granted') {
@@ -154,7 +197,7 @@ export default function PhotoTranslationScreen() {
 
         try {
             // Upload images to the backend for translation
-            const translation = await fetch('http://192.168.31.40:8081/ocr/uploadImage', {
+            const translation = await fetch('http://10.71.95.219:8081/ocr/uploadImage', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'multipart/form-data',
@@ -176,7 +219,7 @@ export default function PhotoTranslationScreen() {
                     };
                     // Saving translation data to the backend
                     if (words) {
-                        const saveWords = await fetch('http://192.168.31.40:8081/insertWords', {
+                        const saveWords = await fetch('http://10.71.95.219:8081/insertWords', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -193,11 +236,18 @@ export default function PhotoTranslationScreen() {
             } catch (error) {
                 console.error('Cannot store data', error);
                 Alert.alert('Store Failed', 'There was an error when storing the image.');
-            }
+            }finally {
+                setLoading(false);
+              }
         } catch (error) {
             console.error('Image upload failed:', error);
             Alert.alert('Upload failed', 'There was an error uploading the image.');
         }
+    }
+}]
+            )}catch (error) {
+                console.error('Error:', error);
+              }    
     }
 
     /**
@@ -224,7 +274,7 @@ export default function PhotoTranslationScreen() {
         if (words) {
             try {
                 // Save translation data to the backend
-                const saveWords = await fetch('http://192.168.31.40:8081/ocr/insertWords', {
+                const saveWords = await fetch('http://10.71.95.219:8081/ocr/insertWords', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -237,7 +287,13 @@ export default function PhotoTranslationScreen() {
             }
         }
     };
-
+    if (loading) {
+        return (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color="#0000ff" />
+          </View>
+        );
+    }
     return (
         <ImageBackground
             source={require('../../assets/Interface/Profile Interface/background.jpg')}
@@ -387,4 +443,10 @@ const getStyles = (width, height) => StyleSheet.create({
         fontWeight: 'bold',
         color: '#115700',
     },
+    loadingContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 });
+

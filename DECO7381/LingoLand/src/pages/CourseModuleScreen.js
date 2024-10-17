@@ -65,7 +65,7 @@ export default function CourseModuleScreen() {
 
         try {
             // Send an update request to the server
-            const response = await fetch('http://192.168.31.40:8081/user/update', {
+            const response = await fetch('http://10.71.95.219:8081/user/update', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -25,7 +25,7 @@ export default function DictionaryScreen() {
   useEffect(() => {
     const fetchVocabularyData = async () => {
       try {
-        const response = await fetch('http://192.168.31.40:8081/word/dictionary/');
+        const response = await fetch('http://10.71.95.219:8081/word/dictionary/');
         const result = await response.json();
         if (response.ok && result.code === 200) {
           setWords(result.data);

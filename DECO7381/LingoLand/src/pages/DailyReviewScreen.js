@@ -85,14 +85,14 @@ export default function DailyReviewScreen() {
             // Switch to Grammar Questions Review
         } else if (!isReviewingWords && currentGrammarIndex < grammarQuestions?.length) {
             navigation.navigate('GrammerTopic', {
-                grammarQuestions: [grammarQuestions?.[currentGrammarIndex]], // 包装成数组
+                grammarQuestions: [grammarQuestions?.[currentGrammarIndex]], // Packing into an array
                 onComplete: handleCorrectAnswer,
                 isReviewMode: true,
                 currentGrammarIndex: currentGrammarIndex,
                 totalGrammarQuestions: grammarQuestions.length
             });
             console.log('Navigating to GrammerTopic with:', {
-                grammarQuestions: [grammarQuestions?.[currentGrammarIndex]], // 确保传递的是数组
+                grammarQuestions: [grammarQuestions?.[currentGrammarIndex]], // Make sure pass an array
                 onComplete: handleCorrectAnswer,
                 isReviewMode: true,
                 currentGrammarIndex: currentGrammarIndex,

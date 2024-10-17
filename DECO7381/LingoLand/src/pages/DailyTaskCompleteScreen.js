@@ -57,7 +57,7 @@ export default function DailyTaskCompleteScreen() {
 
                 console.log('Word to Save:', wordData);
 
-                const vocabularyBookResponse = await fetch('http://192.168.31.40:8081/user/save/vocabularyBook', {
+                const vocabularyBookResponse = await fetch('http://10.71.95.219:8081/user/save/vocabularyBook', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ export default function DailyTaskCompleteScreen() {
 
                 console.log('Grammar to Save:', grammarData);
 
-                const grammarRecordResponse = await fetch('http://192.168.31.40:8081/user/save/grammarRecord', {
+                const grammarRecordResponse = await fetch('http://10.71.95.219:8081/user/save/grammarRecord', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

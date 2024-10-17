@@ -2,12 +2,17 @@ import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+// Get the screen dimensions to dynamically size components
 const { width, height } = Dimensions.get('window');
 
+
 const Header = ({ title, goToScreen }) => {
+    // Get the screen dimensions to dynamically size components
     const navigation = useNavigation();
 
+    // Handle back button press
     const handleBackPress = () => {
+        // Navigate to a specified screen if provided, otherwise go back to the previous screen
         if (goToScreen) {
             navigation.navigate(goToScreen);
         } else {
@@ -25,15 +30,16 @@ const Header = ({ title, goToScreen }) => {
     );
 };
 
+// Styles for the header component
 const styles = StyleSheet.create({
     header: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'flex-start',
-        paddingTop: height * 0.05, // 适配状态栏高度
+        paddingTop: height * 0.05, // Adapt status bar height
         paddingHorizontal: width * 0.05,
-        backgroundColor: '#FFF3DA', // 背景颜色
-        height: height * 0.12, // Header 的高度
+        backgroundColor: '#FFF3DA', // Background Color
+        height: height * 0.12, // Header height
     },
     backButton: {
         marginRight: width * 0.02,

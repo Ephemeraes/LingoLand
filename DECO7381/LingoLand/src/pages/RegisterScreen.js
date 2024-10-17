@@ -116,7 +116,7 @@ export default function RegisterScreen() {
 
             try {
                 // Send registration information to the backend
-                const response = await fetch('http://192.168.31.40:8081/user/register', {
+                const response = await fetch('http://10.71.95.219:8081/user/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

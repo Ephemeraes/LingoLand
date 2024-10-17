@@ -15,16 +15,12 @@ export default function SentenceDetailScreen({ route, navigation }) {
     const { createTime, oriWords, translatedWords, userId, wordsId } = route.params.sentence;
     const { width, height } = Dimensions.get('window');
     const styles = getStyles(width, height);
-    const handleChatHistory = async (wordsId) => {
-        const response = await fetch('http://192.168.31.40:8081/ocr/getChatBot?wordsId=${wordsId}')
-        const data = await response.json();
-        // If has chat history
-        if (Array.isArray(data) && data.length > 0) {
-            navigation.navigate('ChatHistory', data);
-        } else {
-            // If no chat history
-            Alert.alert('No chat history');
-        }
+    const handleChatHistory = async () => {
+        navigation.navigate('ChatBoxHistory', {
+            oriWords: oriWords,
+            translatedWords: translatedWords,
+            userId: userId
+        });
     }
 
     return (
@@ -68,7 +64,7 @@ export default function SentenceDetailScreen({ route, navigation }) {
                 {/* Chatbox Image */}
                 <TouchableOpacity
                     onPress={() => {
-                        handleChatHistory(wordsId);
+                        handleChatHistory();
                     }}>
                     <Image
                         source={require('../../assets/Interface/Note Book/chatbox.png')}

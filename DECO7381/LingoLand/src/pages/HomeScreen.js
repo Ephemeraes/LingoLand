@@ -59,12 +59,12 @@ export default function HomeScreen() {
 
         try {
             // Get Word of the Day data from the server
-            const wordsResponse = await fetch(`http://192.168.31.40:8081/user/gamificationWord/${user.id}`);
+            const wordsResponse = await fetch(`http://10.71.95.219:8081/user/gamificationWord/${user.id}`);
             const wordsData = await wordsResponse.json();
             const { words, isReviewDay: isReviewDayWords } = wordsData.data;
 
             // Getting Daily Grammar Data from the Server
-            const grammarResponse = await fetch(`http://192.168.31.40:8081/user/gamificationGrammar/${user.id}`);
+            const grammarResponse = await fetch(`http://10.71.95.219:8081/user/gamificationGrammar/${user.id}`);
             const grammarData = await grammarResponse.json();
             const { grammars, isReviewDay: isReviewDayGrammar } = grammarData.data;
 

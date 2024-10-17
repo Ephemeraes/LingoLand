@@ -9,7 +9,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
  *
  * @returns {React.Component} Return to User Interface with Chat
  */
-export default function ChatBoxHistoryScreen() {
+export default function ChatBoxScreen({route}) {
+    const { oriWords, translatedWords, userId} = route.params;
     const [isNewTopic, setIsNewTopic] = useState("true");
     const [userName, setUserName] = useState('');
     const navigation = useNavigation();
@@ -37,6 +38,11 @@ export default function ChatBoxHistoryScreen() {
 
         fetchUserName();
     }, []);
+
+    useEffect(() => {
+        const initialMessage = "原文是: " + oriWords + "，翻译是: " + translatedWords + "，请你优化这个翻译结果，给出不同语境情况下的各种翻译情况。";
+        sendMessage(initialMessage);  
+    }, [oriWords, translatedWords]);
     
     /**
      * useFocusEffect hook: 
@@ -55,13 +61,20 @@ export default function ChatBoxHistoryScreen() {
      * sendMessage function: 
      * sends the user's message to the backend, receives the bot's reply, and updates the message list.
      */
-    const sendMessage = () => {
-        if (message.trim() !== '') {
+    const sendMessage = (messageToSend = '') => {
+        let messageContent = ""
+        if(message){
+            messageContent =  message
+        }else{    
+            messageContent = messageToSend;
+        }  
+        console.log(messageContent)
+        if (typeof messageContent === 'string' && messageContent.trim() !== '') {
             fetch('http://10.71.95.219:8083/api/chatgpt/send', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    message: message,
+                    message: messageContent,
                     topicId: 'topic-123',
                     newTopic: isNewTopic,
                 }),
@@ -71,15 +84,35 @@ export default function ChatBoxHistoryScreen() {
                 if (data.status === 'success') {
                     setMessages((prevMessages) => [
                         ...prevMessages,
-                        { id: prevMessages.length + 1, text: message, sender: 'user' },
+                        { id: prevMessages.length + 1, text: messageContent, sender: 'user' },
                         { id: prevMessages.length + 2, text: data.response, sender: 'bot' },
                     ]);
                     setIsNewTopic("false");
+
+                    //store history to chatbot DB
+                    fetch('http://10.71.95.219:8081/ocr/postChatBot', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            wordsId: userId,
+                            content:messageContent,
+                            contentType: 1,
+                        }),
+                    })
+                    fetch('http://10.71.95.219:8081/ocr/postChatBot', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            wordsId: userId,
+                            content:data.response,
+                            contentType: 2,
+                        }),
+                    })
                 }
             })
             .catch((error) => console.error('Error:', error));
     
-            setMessage('');  // Clear the input box
+            setMessage(''); 
         }
     };
     return (

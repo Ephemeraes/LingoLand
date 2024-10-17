@@ -29,7 +29,7 @@ export default function LoginScreen() {
       password
     );
     // Send the username and hashed password to the server
-    fetch('http://192.168.31.40:8081/user/login', {
+    fetch('http://10.71.95.219:8081/user/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

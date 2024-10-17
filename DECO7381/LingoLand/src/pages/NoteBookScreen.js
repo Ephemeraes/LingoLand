@@ -65,7 +65,7 @@ export default function NoteBookScreen() {
   const fetchWords = async (userId) => {
     setLoading(true);
     try {
-      const response = await fetch(`http://192.168.31.40:8081/user/vocabularyBook/list/${userId}`);
+      const response = await fetch(`http://10.71.95.219:8081/user/vocabularyBook/list/${userId}`);
       const data = await response.json();
 
       if (response.ok && data && data.data && data.data.length > 0) {
@@ -90,7 +90,7 @@ export default function NoteBookScreen() {
   const fetchSentences = async (userId) => {
     setLoading(true);
     try {
-      const response = await fetch(`http://192.168.31.40:8081/ocr/getAllResult?userId=${userId}`);
+      const response = await fetch(`http://10.71.95.219:8081/ocr/getAllResult?userId=${userId}`);
       const data = await response.json();
       if (data) {
         console.log('sentences log has items:', data);

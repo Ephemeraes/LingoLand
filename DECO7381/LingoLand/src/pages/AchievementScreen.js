@@ -32,7 +32,7 @@ export default function AchievementScreen() {
                     setUserId(userData.id);
 
                     // Call the API to get user achievement data if userId is set
-                    const response = await fetch(`http://192.168.31.40:8081/user/achievement/${userData.id}`);
+                    const response = await fetch(`http://10.71.95.219:8081/user/achievement/${userData.id}`);
                     const result = await response.json();
 
                     if (result.code === 200 && result.data) {
