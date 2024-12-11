@@ -10,30 +10,30 @@ LingoLand aims to make learning languages fun and efficient through a variety of
 
 ### Overall Structure
 
-LingoLand/
-│
-├── [README.md](README.md) # Project documentation
-│
-├── LingoLand/ # Front-end project folder
-│ ├── [assets/](DECO7381/LingoLand/assets/) # Static resources, such as images and fonts
-│ ├── [src/](DECO7381/LingoLand/src/) # Application source code
-│ │ ├── [components/](DECO7381/LingoLand/src/components/) # Reusable React components
-│ │ └── [pages/](DECO7381/LingoLand/src/pages/) # Various pages/interfaces of the application
-│ ├── [ios/](DECO7381/LingoLand/ios/) # iOS specific code and configuration
-│ ├── [app.json](DECO7381/LingoLand/app.json) # Expo configuration file
-│ ├── [babel.config.js](DECO7381/LingoLand/babel.config.js) # Babel compiler configuration
-│ ├── [metro.config.js](DECO7381/LingoLand/metro.config.js) # Metro packaging tool configuration
-│ ├── [index.js](DECO7381/LingoLand/index.js) # Application entry file
-│ ├── [package.json](DECO7381/LingoLand/package.json) # Project dependencies and scripts
-│ └── [yarn.lock](DECO7381/LingoLand/yarn.lock) # Dependency version lock file
-│
-└── LingoLand_BackEnd/ # Backend project folder
-├── [badword_chatbot/](DECO7381/LingoLand_BackEnd/badword_chatbot/) # ChatBot module for filtering bad words
-├── [LingoLandVersion/](DECO7381/LingoLand_BackEnd/LingoLandVersion/) # Backend version implementation
-├── [src/](DECO7381/LingoLand_BackEnd/LingoLandVersion/src/) # Back-end Java source code
-├── [target/](DECO7381/LingoLand_BackEnd/badword_chatbot/target/) # Maven build output
-└── [pom.xml](DECO7381/LingoLand_BackEnd/LingoLandVersion/pom.xml) # Maven project configuration file
-
+LingoLand/<br>
+│<br>
+├── [README.md](README.md) # Project documentation<br>
+│<br>
+├── LingoLand/ # Front-end project folder<br>
+│ ├── [assets/](DECO7381/LingoLand/assets/) # Static resources, such as images and fonts<br>
+│ ├── [src/](DECO7381/LingoLand/src/) # Application source code<br>
+│ │ ├── [components/](DECO7381/LingoLand/src/components/) # Reusable React components<br>
+│ │ └── [pages/](DECO7381/LingoLand/src/pages/) # Various pages/interfaces of the application<br>
+│ ├── [ios/](DECO7381/LingoLand/ios/) # iOS specific code and configuration<br>
+│ ├── [app.json](DECO7381/LingoLand/app.json) # Expo configuration file<br>
+│ ├── [babel.config.js](DECO7381/LingoLand/babel.config.js) # Babel compiler configuration<br>
+│ ├── [metro.config.js](DECO7381/LingoLand/metro.config.js) # Metro packaging tool configuration<br>
+│ ├── [index.js](DECO7381/LingoLand/index.js) # Application entry file<br>
+│ ├── [package.json](DECO7381/LingoLand/package.json) # Project dependencies and scripts<br>
+│ └── [yarn.lock](DECO7381/LingoLand/yarn.lock) # Dependency version lock file<br>
+│<br>
+└── LingoLand_BackEnd/ # Backend project folder<br>
+├── [badword_chatbot/](DECO7381/LingoLand_BackEnd/badword_chatbot/) # ChatBot module for filtering bad words<br>
+├── [LingoLandVersion/](DECO7381/LingoLand_BackEnd/LingoLandVersion/) # Backend version implementation<br>
+├── [src/](DECO7381/LingoLand_BackEnd/LingoLandVersion/src/) # Back-end Java source code<br>
+├── [target/](DECO7381/LingoLand_BackEnd/badword_chatbot/target/) # Maven build output<br>
+└── [pom.xml](DECO7381/LingoLand_BackEnd/LingoLandVersion/pom.xml) # Maven project configuration file<br>
+<br>
 ## Tools/Technologies Used
 
 1.	Front-end
